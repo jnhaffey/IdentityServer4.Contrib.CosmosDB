@@ -1,0 +1,38 @@
+mode: ContinuousDeployment
+continuous-delivery-fallback-tag: ''
+legacy-semver-padding: 2
+build-metadata-padding: 2
+branches: 
+  master:
+    mode: ContinuousDeployment
+    tag: ''
+    increment: Minor
+    prevent-increment-of-merged-branch-version: true
+    track-merge-target: false
+  features?[/-]:
+    mode: ContinuousDeployment
+    tag: useBranchName
+    increment: Inherit
+    prevent-increment-of-merged-branch-version: false
+    track-merge-target: false
+  (pull|pull\-requests|pr)[/-]:
+    mode: ContinuousDeployment
+    tag: PR
+    increment: Inherit
+    prevent-increment-of-merged-branch-version: false
+    tag-number-pattern: '[/-](?<number>\d+)[-/]'
+    track-merge-target: false
+  (hotfix(es)?|bug(s)?)[/-]:
+    mode: ContinuousDeployment
+    tag: HF
+    increment: Patch
+    prevent-increment-of-merged-branch-version: false
+    track-merge-target: false
+  dev(elop)?(ment)?$:
+    mode: ContinuousDeployment
+    tag: beta
+    increment: Minor
+    prevent-increment-of-merged-branch-version: false
+    track-merge-target: true
+ignore:
+  sha: []

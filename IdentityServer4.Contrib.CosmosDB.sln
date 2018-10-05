@@ -1,0 +1,56 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2041
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{5AD526E5-47F0-4446-ADBB-4B7D643A5A88}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{93069516-8BA2-4F06-A5C7-F21521C84FA2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Host", "src\Host\Host.csproj", "{10302195-5510-47A3-9057-9CD61C75BDBE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityServer4.Contrib.CosmosDB", "src\IdentityServer4.Contrib.CosmosDB\IdentityServer4.Contrib.CosmosDB.csproj", "{F7DD6867-092E-4577-89F8-A6F958665E64}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityServer4.Contrib.CosmosDB.UnitTests", "test\IdentityServer4.Contrib.CosmosDB.UnitTests\IdentityServer4.Contrib.CosmosDB.UnitTests.csproj", "{5013A3A2-B39A-471C-AE42-DBC76FF1EAED}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{FA05747C-4594-4B09-9259-2658DA18A6B9}"
+	ProjectSection(SolutionItems) = preProject
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+		CODE_OF_CONDUCT.md = CODE_OF_CONDUCT.md
+		GitVersion.yml = GitVersion.yml
+		LICENSE = LICENSE
+		readme.md = readme.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{10302195-5510-47A3-9057-9CD61C75BDBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10302195-5510-47A3-9057-9CD61C75BDBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10302195-5510-47A3-9057-9CD61C75BDBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10302195-5510-47A3-9057-9CD61C75BDBE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7DD6867-092E-4577-89F8-A6F958665E64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7DD6867-092E-4577-89F8-A6F958665E64}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7DD6867-092E-4577-89F8-A6F958665E64}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7DD6867-092E-4577-89F8-A6F958665E64}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5013A3A2-B39A-471C-AE42-DBC76FF1EAED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5013A3A2-B39A-471C-AE42-DBC76FF1EAED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5013A3A2-B39A-471C-AE42-DBC76FF1EAED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5013A3A2-B39A-471C-AE42-DBC76FF1EAED}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{10302195-5510-47A3-9057-9CD61C75BDBE} = {5AD526E5-47F0-4446-ADBB-4B7D643A5A88}
+		{F7DD6867-092E-4577-89F8-A6F958665E64} = {5AD526E5-47F0-4446-ADBB-4B7D643A5A88}
+		{5013A3A2-B39A-471C-AE42-DBC76FF1EAED} = {93069516-8BA2-4F06-A5C7-F21521C84FA2}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1997F514-F68D-43FC-B278-EDCA2DAA85F8}
+	EndGlobalSection
+EndGlobal
