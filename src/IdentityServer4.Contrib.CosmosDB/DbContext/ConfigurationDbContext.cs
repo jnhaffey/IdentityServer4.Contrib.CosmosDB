@@ -87,8 +87,19 @@ namespace IdentityServer4.Contrib.CosmosDB.DbContext
             var partitionKeyDefinition = new PartitionKeyDefinition();
             partitionKeyDefinition.Paths.Add(Constants.PartitionKey);
             
+            var indexingPolicy = new IndexingPolicy{ Automatic = true, IndexingMode = IndexingMode.Consistent};
+            indexingPolicy.IncludedPaths.Add(new IncludedPath
+            {
+                Path = "/Name", 
+                Indexes =
+                {
+                    new RangeIndex(DataType.String),
+                    new HashIndex(DataType.String)
+                }
+            });
+
             var identityResources = new DocumentCollection
-                {Id = Constants.CollectionNames.IdentityResource, PartitionKey = partitionKeyDefinition};
+                {Id = Constants.CollectionNames.IdentityResource, PartitionKey = partitionKeyDefinition, IndexingPolicy = indexingPolicy};
             
             _identityResources = DocumentClient
                 .CreateDocumentCollectionIfNotExistsAsync(_identityResourcesUri, identityResources).Result;
