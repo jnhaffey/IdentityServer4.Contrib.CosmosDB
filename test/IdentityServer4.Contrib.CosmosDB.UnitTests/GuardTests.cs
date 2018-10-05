@@ -8,6 +8,7 @@ using static IdentityServer4.Contrib.CosmosDB.Constants;
 namespace IdentityServer4.Contrib.CosmosDB.UnitTests
 {
     [TestClass]
+    [TestCategory("Guard.For")]
     public class GuardTests
     {
         private const string ParameterName = "UnitTestParameterName";
@@ -46,7 +47,7 @@ namespace IdentityServer4.Contrib.CosmosDB.UnitTests
         public void ForNull_StringType_Default()
         {
             // ARRANGE
-            string defaultString = default(string);
+            var defaultString = default(string);
             var expectedMessage =
                 ErrorMessages.ParameterNull.Replace(Placeholders.ParameterName, ParameterName);
 
@@ -91,7 +92,7 @@ namespace IdentityServer4.Contrib.CosmosDB.UnitTests
         public void ForNull_IntType_Default()
         {
             // ARRANGE
-            int defaultInteger = default(int);
+            var defaultInteger = default(int);
 
             // ACT
             Action actionToTest = () => Guard.ForNull(defaultInteger, ParameterName);
@@ -120,7 +121,7 @@ namespace IdentityServer4.Contrib.CosmosDB.UnitTests
         public void ForNull_BoolType_Default()
         {
             // ARRANGE
-            bool defaultBoolean = default(bool);
+            var defaultBoolean = default(bool);
 
             // ACT
             Action actionToTest = () => Guard.ForNull(defaultBoolean, ParameterName);
@@ -129,7 +130,7 @@ namespace IdentityServer4.Contrib.CosmosDB.UnitTests
             actionToTest.Should().NotThrow();
         }
 
-                [TestMethod]
+        [TestMethod]
         public void ForNullOrDefault_StringType_Null()
         {
             // ARRANGE
@@ -164,7 +165,7 @@ namespace IdentityServer4.Contrib.CosmosDB.UnitTests
         public void ForNullOrDefault_StringType_Default()
         {
             // ARRANGE
-            string defaultString = default(string);
+            var defaultString = default(string);
             var expectedMessage =
                 ErrorMessages.ParameterNullOrDefault.Replace(Placeholders.ParameterName, ParameterName);
 
@@ -209,7 +210,7 @@ namespace IdentityServer4.Contrib.CosmosDB.UnitTests
         public void ForNullOrDefault_IntType_Default()
         {
             // ARRANGE
-            int defaultInteger = default(int);
+            var defaultInteger = default(int);
             var expectedMessage =
                 ErrorMessages.ParameterNullOrDefault.Replace(Placeholders.ParameterName, ParameterName);
 
@@ -241,7 +242,7 @@ namespace IdentityServer4.Contrib.CosmosDB.UnitTests
         public void ForNullOrDefault_BoolType_Default()
         {
             // ARRANGE
-            bool defaultBoolean = default(bool);
+            var defaultBoolean = default(bool);
             var expectedMessage =
                 ErrorMessages.ParameterNullOrDefault.Replace(Placeholders.ParameterName, ParameterName);
 
