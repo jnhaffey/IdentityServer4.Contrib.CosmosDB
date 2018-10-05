@@ -29,7 +29,7 @@ build:
   verbosity: minimal
 
 after_build:
-  - cmd: dotnet publish src\IdentityServer4.Contrib.CosmosDB\IdentityServer4.Contrib.CosmosDB.csproj --output %appveyor_build_folder%\dist
+  - cmd: dotnet pack src\IdentityServer4.Contrib.CosmosDB\IdentityServer4.Contrib.CosmosDB.csproj --output %appveyor_build_folder%\dist --no-build
 
 artifacts:
 - path: dist
