@@ -2,7 +2,7 @@ mode: ContinuousDeployment
 continuous-delivery-fallback-tag: ''
 legacy-semver-padding: 2
 build-metadata-padding: 2
-branches: 
+branches:
   master:
     mode: ContinuousDeployment
     tag: ''
@@ -36,3 +36,4 @@ branches:
     track-merge-target: true
 ignore:
   sha: []
+
