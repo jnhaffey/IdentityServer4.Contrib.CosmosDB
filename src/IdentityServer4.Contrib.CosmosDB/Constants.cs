@@ -30,5 +30,11 @@
             // Operational
             public const string PersistedGrant = "PersistedGrants";
         }
+
+        public class Placeholders
+        {
+            public const string ParameterName = "ParameterName";
+            public const string MinimumValue = "MinimumValue";
+        }
     }
 }

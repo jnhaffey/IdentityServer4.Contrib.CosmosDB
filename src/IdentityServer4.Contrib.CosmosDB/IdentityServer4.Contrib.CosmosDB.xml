@@ -23,6 +23,38 @@
             <param name="model">The model.</param>
             <returns></returns>
         </member>
+        <member name="T:IdentityServer4.Contrib.CosmosDB.Guard">
+            <summary>
+                Guard Class
+            </summary>
+        </member>
+        <member name="M:IdentityServer4.Contrib.CosmosDB.Guard.ForNull``1(``0,System.String)">
+            <summary>
+                Test for a null value.
+            </summary>
+            <typeparam name="TData">Type of source.</typeparam>
+            <param name="source">Source to test.</param>
+            <param name="parameterName">Name of parameter.</param>
+            <exception cref="T:System.ArgumentNullException">Exception thrown if null is found.</exception>
+        </member>
+        <member name="M:IdentityServer4.Contrib.CosmosDB.Guard.ForNullOrDefault``1(``0,System.String)">
+            <summary>
+                Test for null or default value.
+            </summary>
+            <typeparam name="TData">Type of source.</typeparam>
+            <param name="source">Source to test.</param>
+            <param name="parameterName">Name of parameter.</param>
+            <exception cref="T:IdentityServer4.Contrib.CosmosDB.Exceptions.ArgumentNullOrDefaultException">Exception thrown if null or default value is found.</exception>
+        </member>
+        <member name="M:IdentityServer4.Contrib.CosmosDB.Guard.ForValueLessThan(System.Int32,System.Int32,System.String)">
+            <summary>
+                Test for value less than minimum value.
+            </summary>
+            <param name="sourceValue">Source to test.</param>
+            <param name="minimumValue">Minimum value.</param>
+            <param name="parameterName">Name of parameter.</param>
+            <exception cref="T:System.ArgumentException">Exception thrown if value is less than minimum value.</exception>
+        </member>
         <member name="T:IdentityServer4.Contrib.CosmosDB.Mappers.ApiResourceMapperProfile">
             <inheritdoc />
             <summary>
