@@ -247,3 +247,6 @@ tools/**
 
 # JetBrains Rider
 .idea/
+
+# VS Code
+.vscode/

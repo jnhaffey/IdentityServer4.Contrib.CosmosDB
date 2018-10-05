@@ -1,17 +1,35 @@
+image: Visual Studio 2017
+
+branches:
+  only:
+  - master
+
+init:
+  # Good practise, because windows
+  - cmd: git config --global core.autocrlf true
+
 install:
+  # Install repo specific stuff here
   - choco install gitversion.portable -pre -y
 
-assembly_info:
-  patch: false
-
 before_build:
-  - nuget restore
+  # Display .NET Core Version
+  - cmd: dotnet --version
+  # Display normal restore text
+  #- cmd: dotnet restore
+  # Display minimal restore text
+  - cmd: dotnet restore --verbosity m
+  # Get and Update GitVersion
   - ps: gitversion /l console /output buildserver /updateAssemblyInfo
 
-build:
-  project: IdentityServer4.Contrib.CosmosDB.sln
+build_script:
+  # Build the solution
+  -cmd: dotnet build
 
 after_build:
-  - cmd: ECHO nuget pack <Project>\<NuSpec>.nuspec -version "%GitVersion_NuGetVersion%" -prop "target=%CONFIGURATION%"
-  - cmd: nuget pack <Project>\<NuSpec>.nuspec -version "%GitVersion_NuGetVersion%" -prop "target=%CONFIGURATION%"
-  - cmd: appveyor PushArtifact "<NuSpec>.%GitVersion_NuGetVersion%.nupkg"
+  # Run Unit Tests
+  - cmd: dotnet test
+  # Publish to NuGet
+  #- cmd: ECHO nuget pack <Project>\<NuSpec>.nuspec -version "%GitVersion_NuGetVersion%" -prop "target=%CONFIGURATION%"
+  #- cmd: nuget pack <Project>\<NuSpec>.nuspec -version "%GitVersion_NuGetVersion%" -prop "target=%CONFIGURATION%"
+  #- cmd: appveyor PushArtifact "<NuSpec>.%GitVersion_NuGetVersion%.nupkg"
