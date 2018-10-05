@@ -22,13 +22,15 @@ before_build:
   # Get and Update GitVersion
   - ps: gitversion /l console /output buildserver /updateAssemblyInfo
 
-build:
+build_script:
   # Build the solution
   -cmd: dotnet build
 
-after_build:
+test_script:
   # Run Unit Tests
-  - cmd: dotnet test test\IdentityServer4.Contrib.CosmosDB.UnitTests\IdentityServer4.Contrib.CosmosDB.UnitTests.csproj
+  - cmd: dotnet test ./test/IdentityServer4.Contrib.CosmosDB.UnitTests/IdentityServer4.Contrib.CosmosDB.UnitTests.csproj
+
+after_build:
   # Publish to NuGet
   #- cmd: ECHO nuget pack <Project>\<NuSpec>.nuspec -version "%GitVersion_NuGetVersion%" -prop "target=%CONFIGURATION%"
   #- cmd: nuget pack <Project>\<NuSpec>.nuspec -version "%GitVersion_NuGetVersion%" -prop "target=%CONFIGURATION%"
