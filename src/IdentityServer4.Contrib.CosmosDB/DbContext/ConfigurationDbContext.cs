@@ -62,19 +62,22 @@ namespace IdentityServer4.Contrib.CosmosDB.DbContext
             var partitionKeyDefinition = new PartitionKeyDefinition();
             partitionKeyDefinition.Paths.Add(Constants.PartitionKey);
 
-            var indexingPolicy = new IndexingPolicy{ Automatic = true, IndexingMode = IndexingMode.Consistent};
+            var indexingPolicy = new IndexingPolicy {Automatic = true, IndexingMode = IndexingMode.Consistent};
             indexingPolicy.IncludedPaths.Add(new IncludedPath
             {
-                Path = "/ClientId", 
+                Path = "/ClientId",
                 Indexes =
                 {
                     new RangeIndex(DataType.String),
                     new HashIndex(DataType.String)
                 }
             });
-            
+
             var clients = new DocumentCollection
-                {Id = Constants.CollectionNames.Client, PartitionKey = partitionKeyDefinition, IndexingPolicy = indexingPolicy};
+            {
+                Id = Constants.CollectionNames.Client, PartitionKey = partitionKeyDefinition,
+                IndexingPolicy = indexingPolicy
+            };
 
             _clients = DocumentClient.CreateDocumentCollectionIfNotExistsAsync(_clientUri, clients).Result;
         }
@@ -83,14 +86,14 @@ namespace IdentityServer4.Contrib.CosmosDB.DbContext
         {
             _identityResourcesUri =
                 UriFactory.CreateDocumentCollectionUri(Database.Id, Constants.CollectionNames.IdentityResource);
-            
+
             var partitionKeyDefinition = new PartitionKeyDefinition();
             partitionKeyDefinition.Paths.Add(Constants.PartitionKey);
-            
-            var indexingPolicy = new IndexingPolicy{ Automatic = true, IndexingMode = IndexingMode.Consistent};
+
+            var indexingPolicy = new IndexingPolicy {Automatic = true, IndexingMode = IndexingMode.Consistent};
             indexingPolicy.IncludedPaths.Add(new IncludedPath
             {
-                Path = "/Name", 
+                Path = "/Name",
                 Indexes =
                 {
                     new RangeIndex(DataType.String),
@@ -99,8 +102,11 @@ namespace IdentityServer4.Contrib.CosmosDB.DbContext
             });
 
             var identityResources = new DocumentCollection
-                {Id = Constants.CollectionNames.IdentityResource, PartitionKey = partitionKeyDefinition, IndexingPolicy = indexingPolicy};
-            
+            {
+                Id = Constants.CollectionNames.IdentityResource, PartitionKey = partitionKeyDefinition,
+                IndexingPolicy = indexingPolicy
+            };
+
             _identityResources = DocumentClient
                 .CreateDocumentCollectionIfNotExistsAsync(_identityResourcesUri, identityResources).Result;
         }
@@ -109,14 +115,14 @@ namespace IdentityServer4.Contrib.CosmosDB.DbContext
         {
             _apiResourcesUri =
                 UriFactory.CreateDocumentCollectionUri(Database.Id, Constants.CollectionNames.ApiResource);
-            
+
             var partitionKeyDefinition = new PartitionKeyDefinition();
             partitionKeyDefinition.Paths.Add(Constants.PartitionKey);
 
-            var indexingPolicy = new IndexingPolicy{ Automatic = true, IndexingMode = IndexingMode.Consistent};
+            var indexingPolicy = new IndexingPolicy {Automatic = true, IndexingMode = IndexingMode.Consistent};
             indexingPolicy.IncludedPaths.Add(new IncludedPath
             {
-                Path = "/Name", 
+                Path = "/Name",
                 Indexes =
                 {
                     new RangeIndex(DataType.String),
@@ -126,7 +132,7 @@ namespace IdentityServer4.Contrib.CosmosDB.DbContext
 
             indexingPolicy.IncludedPaths.Add(new IncludedPath
             {
-                Path = "/Scopes", 
+                Path = "/Scopes",
                 Indexes =
                 {
                     new RangeIndex(DataType.String),
@@ -136,7 +142,7 @@ namespace IdentityServer4.Contrib.CosmosDB.DbContext
 
             var apiResources = new DocumentCollection
                 {Id = Constants.CollectionNames.ApiResource, PartitionKey = partitionKeyDefinition};
-            
+
             _apiResources = DocumentClient.CreateDocumentCollectionIfNotExistsAsync(_apiResourcesUri, apiResources)
                 .Result;
         }
