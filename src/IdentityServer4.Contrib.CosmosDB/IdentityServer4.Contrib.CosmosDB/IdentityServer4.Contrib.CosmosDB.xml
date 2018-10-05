@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>IdentityServer4.Contrib.CosmosDB</name>
+    </assembly>
+    <members>
+        <member name="T:IdentityServer4.Contrib.CosmosDB.Extensions.ClientMapperExtensions">
+            <summary>
+                Extension methods to map to/from entity/model for clients.
+            </summary>
+        </member>
+        <member name="M:IdentityServer4.Contrib.CosmosDB.Extensions.ClientMapperExtensions.ToModel(IdentityServer4.Contrib.CosmosDB.Entities.Client)">
+            <summary>
+                Maps an entity to a model.
+            </summary>
+            <param name="entity">The entity.</param>
+            <returns></returns>
+        </member>
+        <member name="M:IdentityServer4.Contrib.CosmosDB.Extensions.ClientMapperExtensions.ToEntity(IdentityServer4.Models.Client)">
+            <summary>
+                Maps a model to an entity.
+            </summary>
+            <param name="model">The model.</param>
+            <returns></returns>
+        </member>
+        <member name="T:IdentityServer4.Contrib.CosmosDB.Mappers.ApiResourceMapperProfile">
+            <inheritdoc />
+            <summary>
+                AutoMapper configuration for API resource
+                Between model and entity
+            </summary>
+        </member>
+        <member name="M:IdentityServer4.Contrib.CosmosDB.Mappers.ApiResourceMapperProfile.#ctor">
+            <summary>
+                <see cref="T:IdentityServer4.Contrib.CosmosDB.Mappers.ApiResourceMapperProfile" />
+            </summary>
+        </member>
+        <member name="T:IdentityServer4.Contrib.CosmosDB.Mappers.ClientMapperProfile">
+            <inheritdoc />
+            <summary>
+                AutoMapper configuration for Client
+                Between model and entity
+            </summary>
+        </member>
+        <member name="M:IdentityServer4.Contrib.CosmosDB.Mappers.ClientMapperProfile.#ctor">
+            <summary>
+                <see>
+                    <cref>{ClientMapperProfile}</cref>
+                </see>
+            </summary>
+        </member>
+        <member name="T:IdentityServer4.Contrib.CosmosDB.Mappers.IdentityResourceMapperProfile">
+            <inheritdoc />
+            <summary>
+                AutoMapper configuration for identity resource
+                Between model and entity
+            </summary>
+        </member>
+        <member name="M:IdentityServer4.Contrib.CosmosDB.Mappers.IdentityResourceMapperProfile.#ctor">
+            <summary>
+                <see cref="T:IdentityServer4.Contrib.CosmosDB.Mappers.IdentityResourceMapperProfile" />
+            </summary>
+        </member>
+        <member name="T:IdentityServer4.Contrib.CosmosDB.Mappers.PersistedGrantMapperProfile">
+            <inheritdoc />
+            <summary>
+                AutoMapper Config for PersistedGrant
+                Between Model and Entity
+                <seealso cref="!:https://github.com/AutoMapper/AutoMapper/wiki/Configuration">
+                </seealso>
+            </summary>
+        </member>
+        <member name="M:IdentityServer4.Contrib.CosmosDB.Mappers.PersistedGrantMapperProfile.#ctor">
+            <summary>
+                <see cref="T:IdentityServer4.Contrib.CosmosDB.Mappers.PersistedGrantMapperProfile">
+                </see>
+            </summary>
+        </member>
+    </members>
+</doc>

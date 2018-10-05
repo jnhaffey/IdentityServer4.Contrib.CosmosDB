@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>D:\Personal\GitHub\IdentityServer4.Contrib.CosmosDB\src\IdentityServer4.Contrib.CosmosDB\IdentityServer4.Contrib.CosmosDB.xml</DocumentationFile>
+    <DocumentationFile>IdentityServer4.Contrib.CosmosDB.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
