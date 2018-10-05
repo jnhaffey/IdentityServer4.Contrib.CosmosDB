@@ -113,6 +113,27 @@ namespace IdentityServer4.Contrib.CosmosDB.DbContext
             var partitionKeyDefinition = new PartitionKeyDefinition();
             partitionKeyDefinition.Paths.Add(Constants.PartitionKey);
 
+            var indexingPolicy = new IndexingPolicy{ Automatic = true, IndexingMode = IndexingMode.Consistent};
+            indexingPolicy.IncludedPaths.Add(new IncludedPath
+            {
+                Path = "/Name", 
+                Indexes =
+                {
+                    new RangeIndex(DataType.String),
+                    new HashIndex(DataType.String)
+                }
+            });
+
+            indexingPolicy.IncludedPaths.Add(new IncludedPath
+            {
+                Path = "/Scopes", 
+                Indexes =
+                {
+                    new RangeIndex(DataType.String),
+                    new HashIndex(DataType.String)
+                }
+            });
+
             var apiResources = new DocumentCollection
                 {Id = Constants.CollectionNames.ApiResource, PartitionKey = partitionKeyDefinition};
             
