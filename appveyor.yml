@@ -1,9 +1,12 @@
+version: '{build}'
 image: Visual Studio 2017
-
+pull_requests:
+  do_not_increment_build_number: true
 branches:
   only:
   - master
-
+nuget:
+  disable_publish_on_pr: true
 init:
   # Good practise, because windows
   - cmd: git config --global core.autocrlf true
@@ -22,16 +25,16 @@ before_build:
   # Get and Update GitVersion
   - ps: gitversion /l console /output buildserver /updateAssemblyInfo
 
-build_script:
-  # Build the solution
-  -cmd: dotnet build
+build:
+  verbosity: minimal
+
+after_build:
+  - cmd: dotnet publish src\IdentityServer4.Contrib.CosmosDB\IdentityServer4.Contrib.CosmosDB.csproj --output %appveyor_build_folder%\dist
+
+artifacts:
+- path: dist
+  name: dist
 
 test_script:
   # Run Unit Tests
   - cmd: dotnet test ./test/IdentityServer4.Contrib.CosmosDB.UnitTests/IdentityServer4.Contrib.CosmosDB.UnitTests.csproj
-
-after_build:
-  # Publish to NuGet
-  #- cmd: ECHO nuget pack <Project>\<NuSpec>.nuspec -version "%GitVersion_NuGetVersion%" -prop "target=%CONFIGURATION%"
-  #- cmd: nuget pack <Project>\<NuSpec>.nuspec -version "%GitVersion_NuGetVersion%" -prop "target=%CONFIGURATION%"
-  #- cmd: appveyor PushArtifact "<NuSpec>.%GitVersion_NuGetVersion%.nupkg"
