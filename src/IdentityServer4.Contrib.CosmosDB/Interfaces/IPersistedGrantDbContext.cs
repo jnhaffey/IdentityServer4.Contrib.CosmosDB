@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
-using IdentityServer4.Models;
+using IdentityServer4.Contrib.CosmosDB.Entities;
 
 namespace IdentityServer4.Contrib.CosmosDB.Interfaces
 {
@@ -12,8 +13,10 @@ namespace IdentityServer4.Contrib.CosmosDB.Interfaces
         Task Add(PersistedGrant entity);
 
         Task Update(PersistedGrant entity);
+        Task Update(Expression<Func<PersistedGrant, bool>> filter, PersistedGrant entity);
 
         Task Remove(PersistedGrant entity);
+        Task Remove(Expression<Func<PersistedGrant, bool>> filter);
 
         Task RemoveExpired();
     }

@@ -2,8 +2,8 @@
 using System.Linq;
 using System.Threading.Tasks;
 using IdentityServer4.Contrib.CosmosDB.Configuration;
+using IdentityServer4.Contrib.CosmosDB.Entities;
 using IdentityServer4.Contrib.CosmosDB.Interfaces;
-using IdentityServer4.Models;
 using Microsoft.Azure.Documents;
 using Microsoft.Azure.Documents.Client;
 using Microsoft.Extensions.Logging;

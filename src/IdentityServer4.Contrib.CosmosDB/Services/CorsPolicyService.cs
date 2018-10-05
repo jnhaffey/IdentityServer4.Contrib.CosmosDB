@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using IdentityServer4.Contrib.CosmosDB.Interfaces;
 using IdentityServer4.Services;
@@ -22,7 +23,16 @@ namespace IdentityServer4.Contrib.CosmosDB.Services
 
         public Task<bool> IsOriginAllowedAsync(string origin)
         {
-            throw new NotImplementedException();
+            var origins = _context.Clients
+                .SelectMany(x => x.AllowedCorsOrigins.Select(y => y.Origin))
+                .Distinct()
+                .ToList();
+
+            var isAllowed = origins.Contains(origin, StringComparer.OrdinalIgnoreCase);
+
+            _logger.LogDebug("Origin {origin} is allowed: {originAllowed}", origin, isAllowed);
+
+            return Task.FromResult(isAllowed);
         }
     }
 }

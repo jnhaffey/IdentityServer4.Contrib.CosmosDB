@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using IdentityServer4.Contrib.CosmosDB.Configuration;
+using IdentityServer4.Contrib.CosmosDB.Entities;
 using IdentityServer4.Contrib.CosmosDB.Interfaces;
-using IdentityServer4.Models;
 using Microsoft.Azure.Documents;
 using Microsoft.Azure.Documents.Client;
 using Microsoft.Extensions.Logging;
@@ -32,6 +33,11 @@ namespace IdentityServer4.Contrib.CosmosDB.DbContext
             await DocumentClient.CreateDocumentAsync(_persistedGrantsUri, entity);
         }
 
+        public async Task Remove(Expression<Func<PersistedGrant, bool>> filter)
+        {
+            foreach (var persistedGrant in PersistedGrants.Where(filter)) await Remove(persistedGrant);
+        }
+
         public async Task RemoveExpired()
         {
             foreach (var expired in PersistedGrants.Where(x => x.Expiration < DateTime.UtcNow)) await Remove(expired);
@@ -41,6 +47,13 @@ namespace IdentityServer4.Contrib.CosmosDB.DbContext
         {
             var documentUrl = UriFactory.CreateDocumentUri(Database.Id, _persistedGrants.Id, entity.ClientId);
             await DocumentClient.ReplaceDocumentAsync(documentUrl, entity);
+        }
+
+        public async Task Update(Expression<Func<PersistedGrant, bool>> filter, PersistedGrant entity)
+        {
+            // TODO : This looks like its a MongoDb specific thing.  This is an attempt to match it.
+            // await _persistedGrants.ReplaceOneAsync(filter, entity);
+            await DocumentClient.UpsertDocumentAsync(_persistedGrantsUri, entity);
         }
 
         public async Task Remove(PersistedGrant entity)

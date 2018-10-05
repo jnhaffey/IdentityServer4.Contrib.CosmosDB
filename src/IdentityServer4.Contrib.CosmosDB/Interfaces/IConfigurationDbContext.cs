@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using IdentityServer4.Models;
+using IdentityServer4.Contrib.CosmosDB.Entities;
 
 namespace IdentityServer4.Contrib.CosmosDB.Interfaces
 {
