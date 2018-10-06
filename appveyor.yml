@@ -37,4 +37,4 @@ artifacts:
 
 test_script:
   # Run Unit Tests
-  - cmd: dotnet test ./test/IdentityServer4.Contrib.CosmosDB.UnitTests/IdentityServer4.Contrib.CosmosDB.UnitTests.csproj --logger "trx;LogFileName=result.trx"
+  - cmd: dotnet test ./test/IdentityServer4.Contrib.CosmosDB.UnitTests/IdentityServer4.Contrib.CosmosDB.UnitTests.csproj --logger:Appveyor
