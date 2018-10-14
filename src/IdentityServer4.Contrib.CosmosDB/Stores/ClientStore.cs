@@ -24,9 +24,11 @@ namespace IdentityServer4.Contrib.CosmosDB.Stores
 
         public Task<Client> FindClientByIdAsync(string clientId)
         {
-            var client = _context.Clients(clientId).FirstOrDefault(x => x.ClientId == clientId);
+            // TECH DEBT : CosmosDB currently does not support first FirstOrDefault
+            //var client = _context.Clients(clientId).FirstOrDefault(x => x.ClientId == clientId);
+            var clients = _context.Clients(clientId).ToList();
 
-            var model = client?.ToModel();
+            var model = clients?.FirstOrDefault().ToModel();
 
             _logger.LogDebug($"{clientId} found in database: {model != null}");
 
