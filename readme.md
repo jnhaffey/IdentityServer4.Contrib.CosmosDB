@@ -3,7 +3,7 @@
 ## Build
 
 | Branch | Build Status | Release Status | NuGet Package |
-|:-|:-|
+|:-|:-|:-|:-|
 |Master|[![Build status](https://jnhaffey.visualstudio.com/IdentityServer4.Contrib.CosmosDB/_apis/build/status/IdentityServer4.Contrib.CosmosDB-CI%20(master))](https://jnhaffey.visualstudio.com/IdentityServer4.Contrib.CosmosDB/_build/latest?definitionId=7)|[![Deployment status](https://jnhaffey.vsrm.visualstudio.com/_apis/public/Release/badge/ff075ccf-2453-4380-bbe8-04088078c290/3/3)](https://jnhaffey.visualstudio.com/IdentityServer4.Contrib.CosmosDB/_releases2?view=all)|[![NuGet](https://img.shields.io/nuget/v/IdentityServer4.Contrib.CosmosDB.svg)](https://www.nuget.org/packages/IdentityServer4.Contrib.CosmosDB/)|
 |Development|[![Build status](https://jnhaffey.visualstudio.com/IdentityServer4.Contrib.CosmosDB/_apis/build/status/IdentityServer4.Contrib.CosmosDB-CI%20(development))](https://jnhaffey.visualstudio.com/IdentityServer4.Contrib.CosmosDB/_build/latest?definitionId=6)|[![Deployment status](https://jnhaffey.vsrm.visualstudio.com/_apis/public/Release/badge/ff075ccf-2453-4380-bbe8-04088078c290/1/1)](https://jnhaffey.visualstudio.com/IdentityServer4.Contrib.CosmosDB/_releases2?view=all)|[![NuGet](https://img.shields.io/nuget/vpre/IdentityServer4.Contrib.CosmosDB.svg)](https://www.nuget.org/packages/IdentityServer4.Contrib.CosmosDB/)|
 
