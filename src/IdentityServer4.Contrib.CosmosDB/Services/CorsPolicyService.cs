@@ -12,7 +12,7 @@ namespace IdentityServer4.Contrib.CosmosDB.Services
         private readonly IConfigurationDbContext _context;
         private readonly ILogger _logger;
 
-        public CorsPolicyService(IConfigurationDbContext context, ILogger logger)
+        public CorsPolicyService(IConfigurationDbContext context, ILogger<CorsPolicyService> logger)
         {
             Guard.ForNull(context, nameof(context));
             Guard.ForNull(logger, nameof(logger));
@@ -23,12 +23,14 @@ namespace IdentityServer4.Contrib.CosmosDB.Services
 
         public Task<bool> IsOriginAllowedAsync(string origin)
         {
-            var origins = _context.Clients
+            // If we use SelectMany directly, we got a Unsupported Exception inside CosmosDb.
+            var clients = _context.Clients().ToList();
+            var distinctOrigins = clients.Where(x => x != null)
                 .SelectMany(x => x.AllowedCorsOrigins.Select(y => y.Origin))
                 .Distinct()
                 .ToList();
 
-            var isAllowed = origins.Contains(origin, StringComparer.OrdinalIgnoreCase);
+            var isAllowed = distinctOrigins.Contains(origin, StringComparer.OrdinalIgnoreCase);
 
             _logger.LogDebug("Origin {origin} is allowed: {originAllowed}", origin, isAllowed);
 

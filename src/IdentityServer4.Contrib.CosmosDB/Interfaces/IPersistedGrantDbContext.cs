@@ -8,7 +8,7 @@ namespace IdentityServer4.Contrib.CosmosDB.Interfaces
 {
     public interface IPersistedGrantDbContext : IDisposable
     {
-        IQueryable<PersistedGrant> PersistedGrants { get; }
+        IQueryable<PersistedGrant> PersistedGrants(string partitionKey = "");
 
         Task Add(PersistedGrant entity);
 

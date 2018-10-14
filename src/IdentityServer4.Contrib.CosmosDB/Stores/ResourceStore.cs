@@ -14,7 +14,7 @@ namespace IdentityServer4.Contrib.CosmosDB.Stores
         private readonly IConfigurationDbContext _context;
         private readonly ILogger _logger;
 
-        public ResourceStore(IConfigurationDbContext context, ILogger logger)
+        public ResourceStore(IConfigurationDbContext context, ILogger<ResourceStore> logger)
         {
             Guard.ForNull(context, nameof(context));
             Guard.ForNull(logger, nameof(logger));
@@ -27,8 +27,7 @@ namespace IdentityServer4.Contrib.CosmosDB.Stores
         {
             var scopes = scopeNames.ToArray();
 
-            var resources =
-                from identityResource in _context.IdentityResources
+            var resources = from identityResource in _context.IdentityResources()
                 where scopes.Contains(identityResource.Name)
                 select identityResource;
 
@@ -43,8 +42,7 @@ namespace IdentityServer4.Contrib.CosmosDB.Stores
         {
             var names = scopeNames.ToArray();
 
-            var apis =
-                from api in _context.ApiResources
+            var apis = from api in _context.ApiResources()
                 where api.Scopes.Any(x => names.Contains(x.Name))
                 select api;
 
@@ -59,8 +57,7 @@ namespace IdentityServer4.Contrib.CosmosDB.Stores
 
         public Task<ApiResource> FindApiResourceAsync(string name)
         {
-            var apis =
-                from apiResource in _context.ApiResources
+            var apis = from apiResource in _context.ApiResources()
                 where apiResource.Name == name
                 select apiResource;
 
@@ -76,9 +73,9 @@ namespace IdentityServer4.Contrib.CosmosDB.Stores
 
         public Task<Resources> GetAllResourcesAsync()
         {
-            var identity = _context.IdentityResources;
+            var identity = _context.IdentityResources();
 
-            var apis = _context.ApiResources;
+            var apis = _context.ApiResources();
 
             var result = new Resources(
                 identity.ToArray().Select(x => x.ToModel()).AsEnumerable(),

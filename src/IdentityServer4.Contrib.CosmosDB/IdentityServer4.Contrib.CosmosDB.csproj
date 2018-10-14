@@ -8,21 +8,23 @@
     <FileVersion>0.0.0.0</FileVersion>
     <Authors>Jason N Haffey</Authors>
     <Company />
-    <PackageProjectUrl>https://github.com/jnhaffey/IdentityServer4.Contrib.CosmosDB</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/jnhaffey/IdentityServer4.Contrib.CosmosDB</RepositoryUrl>
-    <RepositoryType>GitHub</RepositoryType>
+    <PackageProjectUrl>https://dev.azure.com/jnhaffey/IdentityServer4.Contrib.CosmosDB</PackageProjectUrl>
+    <RepositoryUrl>https://dev.azure.com/jnhaffey/IdentityServer4.Contrib.CosmosDB</RepositoryUrl>
+    <RepositoryType>Azure DevOps</RepositoryType>
     <PackageTags>OAuth2,OpenID,Security,Identity,IdentityServer,CosmosDb</PackageTags>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>IdentityServer4.Contrib.CosmosDB.xml</DocumentationFile>
+    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="7.0.1" />
     <PackageReference Include="IdentityServer4" Version="2.2.0" />
-    <PackageReference Include="Microsoft.Azure.DocumentDB.Core" Version="2.1.2" />
+    <PackageReference Include="Microsoft.Azure.DocumentDB.Core" Version="2.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="2.1.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <DotNetCliToolReference Include="dotnet-setversion" Version="1.0.3" />
+  </ItemGroup>
+  
 </Project>

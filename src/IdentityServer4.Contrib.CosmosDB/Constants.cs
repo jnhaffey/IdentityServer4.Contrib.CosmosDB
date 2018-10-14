@@ -3,7 +3,8 @@
     public class Constants
     {
         public const string DatabaseName = "IdentityDb";
-        public const string PartitionKey = "/partitionKey";
+        public const string DefaultPartitionKey = "/partitionKey";
+        public const int DefaultReserveUnits = 1000;
 
         public class CollectionNames
         {
@@ -16,7 +17,7 @@
             public const string ApiScope = "ApiScopes";
             public const string ApiClaim = "ApiClaims";
             public const string ApiScopeClaim = "ApiScopeClaims";
-            
+
             public const string Client = "Clients";
             public const string ClientGrantType = "ClientGrantTypes";
             public const string ClientRedirectUri = "ClientRedirectUris";
@@ -29,6 +30,14 @@
 
             // Operational
             public const string PersistedGrant = "PersistedGrants";
+        }
+
+        public class CollectionPartitionKeys
+        {
+            public const string IdentityResource = "/name";
+            public const string ApiResource = "/name";
+            public const string Client = "/clientId";
+            public const string PersistedGrant = "/clientId";
         }
 
         public class Placeholders

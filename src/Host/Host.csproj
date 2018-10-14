@@ -1,15 +1,37 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
+    <langVersion>Latest</langVersion>
+    <PreserveCompilationContext>true</PreserveCompilationContext>
+    <AssemblyName>Host</AssemblyName>
+    <OutputType>Exe</OutputType>
+    <PackageId>Host</PackageId>
+    <RuntimeIdentifiers>win10-x64;win7-x64</RuntimeIdentifiers>
   </PropertyGroup>
 
+    <ItemGroup>
+    <None Update="wwwroot\**\*">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </None>
+  </ItemGroup>
+  
   <ItemGroup>
-    <Folder Include="wwwroot\" />
+    <Folder Include="Controllers\" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.1.0" />
+    <PackageReference Include="Microsoft.Azure.DocumentDB.Core" Version="2.0.0" />
+    <PackageReference Include="Serilog" Version="2.7.1" />
+    <PackageReference Include="Serilog.AspNetCore" Version="2.1.1" />
+    <PackageReference Include="Serilog.Extensions.Logging" Version="2.0.2" />
+    <PackageReference Include="Serilog.Settings.Configuration" Version="3.0.0" />
+    <PackageReference Include="Serilog.Sinks.ColoredConsole" Version="3.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\IdentityServer4.Contrib.CosmosDB\IdentityServer4.Contrib.CosmosDB.csproj" />
   </ItemGroup>
 
 </Project>

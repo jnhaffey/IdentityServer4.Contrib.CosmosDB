@@ -7,11 +7,11 @@ namespace IdentityServer4.Contrib.CosmosDB.Interfaces
 {
     public interface IConfigurationDbContext : IDisposable
     {
-        IQueryable<Client> Clients { get; }
+        IQueryable<Client> Clients(string partitionKey = "");
 
-        IQueryable<IdentityResource> IdentityResources { get; }
+        IQueryable<IdentityResource> IdentityResources(string partitionKey = "");
 
-        IQueryable<ApiResource> ApiResources { get; }
+        IQueryable<ApiResource> ApiResources(string partitionKey = "");
 
         Task AddClient(Client entity);
 

@@ -14,8 +14,17 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace IdentityServer4.Contrib.CosmosDB.Extensions
 {
+    /// <summary>
+    ///     Extension methods to setup and configure IdentityServerBuilder
+    /// </summary>
     public static class IdentityServerBuilderExtensions
     {
+        /// <summary>
+        ///     Add Configuration Store
+        /// </summary>
+        /// <param name="builder">The IIdentity Server Builder</param>
+        /// <param name="setupAction"></param>
+        /// <returns></returns>
         public static IIdentityServerBuilder AddConfigurationStore(
             this IIdentityServerBuilder builder, Action<CosmosDbConfiguration> setupAction)
         {
@@ -24,6 +33,12 @@ namespace IdentityServer4.Contrib.CosmosDB.Extensions
             return builder.AddConfigurationStore();
         }
 
+        /// <summary>
+        ///     Add Configuration Store
+        /// </summary>
+        /// <param name="builder">The IIdentity Server Builder</param>
+        /// <param name="configuration"></param>
+        /// <returns></returns>
         public static IIdentityServerBuilder AddConfigurationStore(
             this IIdentityServerBuilder builder, IConfiguration configuration)
         {
@@ -32,9 +47,16 @@ namespace IdentityServer4.Contrib.CosmosDB.Extensions
             return builder.AddConfigurationStore();
         }
 
+        /// <summary>
+        ///     Add Operational Store
+        /// </summary>
+        /// <param name="builder">The IIdentity Server Builder</param>
+        /// <param name="setupAction"></param>
+        /// <param name="tokenCleanUpOptions"></param>
+        /// <returns></returns>
         public static IIdentityServerBuilder AddOperationalStore(
-            this IIdentityServerBuilder builder, 
-            Action<CosmosDbConfiguration> setupAction, 
+            this IIdentityServerBuilder builder,
+            Action<CosmosDbConfiguration> setupAction,
             Action<TokenCleanupOptions> tokenCleanUpOptions = null)
         {
             builder.Services.Configure(setupAction);
@@ -42,14 +64,39 @@ namespace IdentityServer4.Contrib.CosmosDB.Extensions
             return builder.AddOperationalStore(tokenCleanUpOptions);
         }
 
+        /// <summary>
+        ///     Add Operational Store
+        /// </summary>
+        /// <param name="builder">The IIdentity Server Builder</param>
+        /// <param name="configuration"></param>
+        /// <param name="tokenCleanUpOptions"></param>
+        /// <returns></returns>
         public static IIdentityServerBuilder AddOperationalStore(
-            this IIdentityServerBuilder builder, 
+            this IIdentityServerBuilder builder,
             IConfiguration configuration,
             Action<TokenCleanupOptions> tokenCleanUpOptions = null)
         {
             builder.Services.Configure<CosmosDbConfiguration>(configuration);
 
             return builder.AddOperationalStore(tokenCleanUpOptions);
+        }
+
+        /// <summary>
+        ///     Use Identity Server with CosmosDb Token Cleanup.
+        /// </summary>
+        /// <param name="app">The Application Builder</param>
+        /// <param name="applicationLifetime"></param>
+        /// <returns></returns>
+        public static IApplicationBuilder UseIdentityServerCosmosDbTokenCleanup(this IApplicationBuilder app,
+            IApplicationLifetime applicationLifetime)
+        {
+            var tokenCleanup = app.ApplicationServices.GetService<TokenCleanup>();
+            if (tokenCleanup == null)
+                throw new InvalidOperationException("AddOperationalStore must be called on the service collection.");
+            applicationLifetime.ApplicationStarted.Register(tokenCleanup.Start);
+            applicationLifetime.ApplicationStopping.Register(tokenCleanup.Stop);
+
+            return app;
         }
 
         private static IIdentityServerBuilder AddConfigurationStore(this IIdentityServerBuilder builder)
@@ -63,7 +110,7 @@ namespace IdentityServer4.Contrib.CosmosDB.Extensions
         }
 
         private static IIdentityServerBuilder AddOperationalStore(
-            this IIdentityServerBuilder builder, 
+            this IIdentityServerBuilder builder,
             Action<TokenCleanupOptions> tokenCleanUpOptions = null)
         {
             builder.Services.AddScoped<IPersistedGrantDbContext, PersistedGrantDbContext>();
@@ -76,19 +123,6 @@ namespace IdentityServer4.Contrib.CosmosDB.Extensions
             builder.Services.AddSingleton<TokenCleanup>();
 
             return builder;
-        }
-
-        public static IApplicationBuilder UseIdentityServerCosmosDbTokenCleanup(this IApplicationBuilder app, IApplicationLifetime applicationLifetime)
-        {
-            var tokenCleanup = app.ApplicationServices.GetService<TokenCleanup>();
-            if (tokenCleanup == null)
-            {
-                throw new InvalidOperationException("AddOperationalStore must be called on the service collection.");
-            }
-            applicationLifetime.ApplicationStarted.Register(tokenCleanup.Start);
-            applicationLifetime.ApplicationStopping.Register(tokenCleanup.Stop);
-
-            return app;
         }
     }
 }

@@ -13,7 +13,7 @@ namespace IdentityServer4.Contrib.CosmosDB.Stores
         private readonly IConfigurationDbContext _context;
         private readonly ILogger _logger;
 
-        public ClientStore(IConfigurationDbContext context, ILogger logger)
+        public ClientStore(IConfigurationDbContext context, ILogger<ClientStore> logger)
         {
             Guard.ForNull(context, nameof(context));
             Guard.ForNull(logger, nameof(logger));
@@ -24,7 +24,7 @@ namespace IdentityServer4.Contrib.CosmosDB.Stores
 
         public Task<Client> FindClientByIdAsync(string clientId)
         {
-            var client = _context.Clients.FirstOrDefault(x => x.ClientId == clientId);
+            var client = _context.Clients(clientId).FirstOrDefault(x => x.ClientId == clientId);
 
             var model = client?.ToModel();
 

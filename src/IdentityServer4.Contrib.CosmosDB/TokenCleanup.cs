@@ -9,6 +9,9 @@ using Microsoft.Extensions.Logging;
 
 namespace IdentityServer4.Contrib.CosmosDB
 {
+    /// <summary>
+    ///     Token Cleanup Class.
+    /// </summary>
     public class TokenCleanup
     {
         private readonly TimeSpan _interval;
@@ -16,7 +19,17 @@ namespace IdentityServer4.Contrib.CosmosDB
         private readonly IServiceProvider _serviceProvider;
         private CancellationTokenSource _source;
 
-        public TokenCleanup(IServiceProvider serviceProvider, ILogger logger, TokenCleanupOptions options)
+        /// <summary>
+        ///     Create an instance of the TokenCleanup Class.
+        /// </summary>
+        /// <param name="serviceProvider">Instance of the Service Provider.</param>
+        /// <param name="logger">Instance of the Logger.</param>
+        /// <param name="options">Instance of the Token Cleanup Options.</param>
+        /// <exception cref="ArgumentNullException">Is thrown when serviceProvider, logger or options is null.</exception>
+        /// <exception cref="ArgumentException">Is thrown when options.interval is less than 1.</exception>
+        public TokenCleanup(IServiceProvider serviceProvider, 
+            ILogger<TokenCleanup> logger, 
+            TokenCleanupOptions options)
         {
             Guard.ForNull(serviceProvider, nameof(serviceProvider));
             Guard.ForNull(logger, nameof(logger));
@@ -28,6 +41,10 @@ namespace IdentityServer4.Contrib.CosmosDB
             _interval = TimeSpan.FromSeconds(options.Interval);
         }
 
+        /// <summary>
+        ///     Starts the process for cleaning up the tokens.
+        /// </summary>
+        /// <exception cref="InvalidOperationException">Is thrown when the process is already running.</exception>
         public void Start()
         {
             if (_source != null) throw new InvalidOperationException($"Already started, call `{nameof(Stop)}` first.");
@@ -38,6 +55,10 @@ namespace IdentityServer4.Contrib.CosmosDB
             Task.Factory.StartNew(() => Start(_source.Token));
         }
 
+        /// <summary>
+        ///     Stops the process for cleaning up the tokens.
+        /// </summary>
+        /// <exception cref="InvalidOperationException">Is thrown when the process is not running.</exception>
         public void Stop()
         {
             if (_source == null) throw new InvalidOperationException($"Not started, call `{nameof(Start)}` first.");
@@ -87,7 +108,7 @@ namespace IdentityServer4.Contrib.CosmosDB
                 {
                     using (var context = serviceScope.ServiceProvider.GetService<IPersistedGrantDbContext>())
                     {
-                        var expired = context.PersistedGrants.Where(x => x.Expiration < DateTime.UtcNow).ToArray();
+                        var expired = context.PersistedGrants().Where(x => x.Expiration < DateTime.UtcNow).ToArray();
 
                         _logger.LogDebug("Clearing {tokenCount} tokens", expired.Length);
 

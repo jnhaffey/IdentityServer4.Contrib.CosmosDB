@@ -5,7 +5,8 @@ using IdentityServer4.Models;
 namespace IdentityServer4.Contrib.CosmosDB.Extensions
 {
     /// <summary>
-    ///     Extension methods to map to/from entity/model for clients.
+    ///     Extension methods to map IdentityServer4.Models.Client to
+    ///     IdentityServer4.Contrib.CosmosDB.Entities.Client.
     /// </summary>
     public static class ClientMapperExtensions
     {
@@ -18,20 +19,20 @@ namespace IdentityServer4.Contrib.CosmosDB.Extensions
         internal static IMapper Mapper { get; }
 
         /// <summary>
-        ///     Maps an entity to a model.
+        ///     Will map all data in IdentityServer4.Contrib.CosmosDB.Entities.Client to IdentityServer4.Models.Client.
         /// </summary>
-        /// <param name="entity">The entity.</param>
-        /// <returns></returns>
+        /// <param name="entity">The IdentityServer4.Contrib.CosmosDB.Entities.Client to gather data from.</param>
+        /// <returns>An instance of IdentityServer4.Models.Client.</returns>
         public static Client ToModel(this Entities.Client entity)
         {
             return Mapper.Map<Client>(entity);
         }
 
         /// <summary>
-        ///     Maps a model to an entity.
+        ///     Will map all data in IdentityServer4.Models.Client to IdentityServer4.Contrib.CosmosDB.Entities.Client.
         /// </summary>
-        /// <param name="model">The model.</param>
-        /// <returns></returns>
+        /// <param name="model">The IdentityServer4.Models.Client to gather data from.</param>
+        /// <returns>An instance of IdentityServer4.Contrib.CosmosDB.Entities.Client.</returns>
         public static Entities.Client ToEntity(this Client model)
         {
             return Mapper.Map<Entities.Client>(model);

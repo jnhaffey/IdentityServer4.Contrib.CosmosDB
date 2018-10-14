@@ -15,7 +15,7 @@ namespace IdentityServer4.Contrib.CosmosDB.Stores
         private readonly IPersistedGrantDbContext _context;
         private readonly ILogger _logger;
 
-        public PersistedGrantStore(IPersistedGrantDbContext context, ILogger logger)
+        public PersistedGrantStore(IPersistedGrantDbContext context, ILogger<PersistedGrantStore> logger)
         {
             Guard.ForNull(context, nameof(context));
             Guard.ForNull(logger, nameof(logger));
@@ -28,7 +28,7 @@ namespace IdentityServer4.Contrib.CosmosDB.Stores
         {
             try
             {
-                var existing = _context.PersistedGrants.SingleOrDefault(x => x.Key == token.Key);
+                var existing = _context.PersistedGrants().SingleOrDefault(x => x.Key == token.Key);
                 if (existing == null)
                 {
                     _logger.LogDebug("{persistedGrantKey} not found in database", token.Key);
@@ -54,7 +54,7 @@ namespace IdentityServer4.Contrib.CosmosDB.Stores
 
         public Task<PersistedGrant> GetAsync(string key)
         {
-            var persistedGrant = _context.PersistedGrants.FirstOrDefault(x => x.Key == key);
+            var persistedGrant = _context.PersistedGrants().FirstOrDefault(x => x.Key == key);
             var model = persistedGrant.ToModel();
 
             _logger.LogDebug($"{key} found in database: {model != null}");
@@ -64,7 +64,7 @@ namespace IdentityServer4.Contrib.CosmosDB.Stores
 
         public Task<IEnumerable<PersistedGrant>> GetAllAsync(string subjectId)
         {
-            var persistedGrants = _context.PersistedGrants.Where(x => x.SubjectId == subjectId).ToList();
+            var persistedGrants = _context.PersistedGrants().Where(x => x.SubjectId == subjectId).ToList();
             var model = persistedGrants.Select(x => x.ToModel());
 
             _logger.LogDebug($"{persistedGrants.Count} persisted grants found for {subjectId}");
