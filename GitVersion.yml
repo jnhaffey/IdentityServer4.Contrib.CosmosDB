@@ -1,3 +1,4 @@
+next-version: 0.2.1
 mode: ContinuousDeployment
 continuous-delivery-fallback-tag: ''
 legacy-semver-padding: 2
