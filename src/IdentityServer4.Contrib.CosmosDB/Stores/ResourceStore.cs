@@ -42,7 +42,7 @@ namespace IdentityServer4.Contrib.CosmosDB.Stores
         {
             var names = scopeNames.ToArray();
 
-            var apis = from api in _context.ApiResources()
+            var apis = from api in _context.ApiResources().ToList()
                 where api.Scopes.Any(x => names.Contains(x.Name))
                 select api;
 
