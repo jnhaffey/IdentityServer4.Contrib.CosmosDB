@@ -131,7 +131,17 @@ namespace IdentityServer4.Contrib.CosmosDB.DbContext
             var indexingPolicy = new IndexingPolicy
             {
                 Automatic = true,
-                IndexingMode = IndexingMode.Consistent
+                IndexingMode = IndexingMode.Consistent, IncludedPaths =
+                {
+                    new IncludedPath
+                    {
+                        Path = "/expiration",
+                        Indexes =
+                        {
+                            Index.Range(DataType.String)
+                        }
+                    }
+                }
             };
             Logger?.LogDebug($"Persisted Grants Indexing Policy: {indexingPolicy}");
 

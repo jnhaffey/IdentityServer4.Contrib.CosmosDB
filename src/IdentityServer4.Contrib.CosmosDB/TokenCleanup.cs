@@ -108,11 +108,11 @@ namespace IdentityServer4.Contrib.CosmosDB
                 {
                     using (var context = serviceScope.ServiceProvider.GetService<IPersistedGrantDbContext>())
                     {
-                        var expired = context.PersistedGrants().Where(x => x.Expiration < DateTime.UtcNow).ToArray();
+                        var expired = context.PersistedGrants().Where(x => x.Expiration < DateTime.UtcNow).ToList();
 
-                        _logger.LogDebug("Clearing {tokenCount} tokens", expired.Length);
+                        _logger.LogDebug("Clearing {tokenCount} tokens", expired.Count);
 
-                        if (expired.Length > 0) await context.RemoveExpired();
+                        if (expired.Count > 0) await context.RemoveExpired();
                     }
                 }
             }

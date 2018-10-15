@@ -17,10 +17,24 @@ _appsettings.json_
 {
   "CosmosDb": {
     "EndPointUrl": "https://localhost:8081",
-    "PrimaryKey": "C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw=="
+    "PrimaryKey": "C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw==",
+    "DatabaseName": "MyTestDatabase",
+    "Collections":[
+      {
+        "CollectionName": "ApiResources",
+        "ReserveUnits": 1000
+      }
+    ]
   }
 }
 ```
+**EndPointUrl** and **PrimaryKey** are required values.  
+**DatabaseName** and **Collections** are optional values.
+Within Collections Objects, **CollectionName** can only be one of the following:  
+• ApiResources    
+• Clients  
+• IdentityResources  
+• PersistedGrants
 
 _Startup.cs_
 ```CSharp
