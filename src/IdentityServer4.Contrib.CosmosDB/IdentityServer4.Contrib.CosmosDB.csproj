@@ -8,9 +8,9 @@
     <FileVersion>0.0.0.0</FileVersion>
     <Authors>Jason N Haffey</Authors>
     <Company />
-    <PackageProjectUrl>https://dev.azure.com/jnhaffey/IdentityServer4.Contrib.CosmosDB</PackageProjectUrl>
-    <RepositoryUrl>https://dev.azure.com/jnhaffey/IdentityServer4.Contrib.CosmosDB</RepositoryUrl>
-    <RepositoryType>Azure DevOps</RepositoryType>
+    <PackageProjectUrl>https://github.com/jnhaffey/IdentityServer4.Contrib.CosmosDB</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/jnhaffey/IdentityServer4.Contrib.CosmosDB</RepositoryUrl>
+    <RepositoryType>GitHub</RepositoryType>
     <PackageTags>OAuth2,OpenID,Security,Identity,IdentityServer,CosmosDb</PackageTags>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
