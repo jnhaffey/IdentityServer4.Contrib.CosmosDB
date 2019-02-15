@@ -135,7 +135,15 @@ namespace IdentityServer4.Contrib.CosmosDB.DbContext
                 {
                     new IncludedPath
                     {
-                        Path = "/expiration",
+                        Path = "/expiration/?",
+                        Indexes =
+                        {
+                            Index.Range(DataType.String)
+                        }
+                    },
+                    new IncludedPath
+                    {
+                        Path = "/",
                         Indexes =
                         {
                             Index.Range(DataType.String)
