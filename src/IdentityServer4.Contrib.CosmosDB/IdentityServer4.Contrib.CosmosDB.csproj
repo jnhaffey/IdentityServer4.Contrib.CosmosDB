@@ -20,9 +20,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="7.0.1" />
-    <PackageReference Include="IdentityServer4" Version="2.2.0" />
-    <PackageReference Include="Microsoft.Azure.DocumentDB.Core" Version="2.1.2" />
+    <PackageReference Include="AutoMapper" Version="8.1.1" />
+    <PackageReference Include="IdentityServer4" Version="2.4.0" />
+    <PackageReference Include="Microsoft.Azure.DocumentDB.Core" Version="2.4.0" />
   </ItemGroup>
 
 </Project>
