@@ -32,7 +32,7 @@ namespace IdentityServer4.Contrib.CosmosDB.DbContext
         /// <param name="connectionPolicy"></param>
         /// <param name="logger"></param>
         public PersistedGrantDbContext(IOptions<CosmosDbConfiguration> settings,
-            string databaseName = Constants.DatabaseName,
+            string databaseName = "PinHuntr",//Constants.DatabaseName,
             ConnectionPolicy connectionPolicy = null,
             ILogger<PersistedGrantDbContext> logger = null)
             : base(settings, databaseName, connectionPolicy, logger)
@@ -131,15 +131,21 @@ namespace IdentityServer4.Contrib.CosmosDB.DbContext
             var indexingPolicy = new IndexingPolicy
             {
                 Automatic = true,
-                IndexingMode = IndexingMode.Consistent, IncludedPaths =
+                IndexingMode = IndexingMode.Consistent,
+                IncludedPaths =
                 {
                     new IncludedPath
                     {
-                        Path = "/expiration",
+                        Path = "/expiration/?",
                         Indexes =
                         {
                             Index.Range(DataType.String)
                         }
+                    },
+                    new IncludedPath
+                    {
+                        Path = "/",
+                        Indexes = {Index.Range(DataType.String)}
                     }
                 }
             };
