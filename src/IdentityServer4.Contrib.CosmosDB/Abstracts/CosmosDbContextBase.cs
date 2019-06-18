@@ -91,7 +91,7 @@ namespace IdentityServer4.Contrib.CosmosDB.Abstracts
 
             DatabaseUri = UriFactory.CreateDatabaseUri(dbNameToUse);
             Logger?.LogDebug($"Database URI: {DatabaseUri}");
-            Database = new Database {Id = databaseName};
+            Database = new Database {Id = dbNameToUse };
             Logger?.LogDebug($"Database: {Database}");
 
             Logger.LogDebug($"Ensuring `{Database.Id}` exists...");

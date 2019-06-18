@@ -32,7 +32,7 @@ namespace IdentityServer4.Contrib.CosmosDB.DbContext
         /// <param name="connectionPolicy"></param>
         /// <param name="logger"></param>
         public PersistedGrantDbContext(IOptions<CosmosDbConfiguration> settings,
-            string databaseName = "PinHuntr",//Constants.DatabaseName,
+            string databaseName = Constants.DatabaseName,
             ConnectionPolicy connectionPolicy = null,
             ILogger<PersistedGrantDbContext> logger = null)
             : base(settings, databaseName, connectionPolicy, logger)
