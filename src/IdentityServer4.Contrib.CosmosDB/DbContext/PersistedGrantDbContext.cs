@@ -131,15 +131,21 @@ namespace IdentityServer4.Contrib.CosmosDB.DbContext
             var indexingPolicy = new IndexingPolicy
             {
                 Automatic = true,
-                IndexingMode = IndexingMode.Consistent, IncludedPaths =
+                IndexingMode = IndexingMode.Consistent,
+                IncludedPaths =
                 {
                     new IncludedPath
                     {
-                        Path = "/expiration",
+                        Path = "/expiration/?",
                         Indexes =
                         {
                             Index.Range(DataType.String)
                         }
+                    },
+                    new IncludedPath
+                    {
+                        Path = "/",
+                        Indexes = {Index.Range(DataType.String)}
                     }
                 }
             };
