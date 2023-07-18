@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.1.21" />
     <PackageReference Include="Microsoft.Azure.DocumentDB.Core" Version="2.0.0" />
     <PackageReference Include="Serilog" Version="2.7.1" />
     <PackageReference Include="Serilog.AspNetCore" Version="2.1.1" />
